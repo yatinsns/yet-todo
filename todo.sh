@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ $# -ne 1 ]
+if [ $# -eq 0 ]
 then 
 	echo "Error : wrong number of paramaters"
 	exit
@@ -8,15 +8,56 @@ fi
 
 case $1 in
 create)
-	echo "This will create a new list";;
+	if [ -n "$2" ]
+	then
+		echo "This will create a new list with name $2"	
+	else
+		echo "Error: List name is missing"
+	fi;;
 remove)
-	echo "This will remove an existing list";;
+	if [ -n "$2" ]
+	then
+		echo "This will delete an existing list with name $2"
+	else
+		echo "Error: List name is missing"
+	fi;;
 add)
-	echo "This will add a new todo item in a given list";;
+	if [ -n "$2" ]
+	then
+		if [ -n "$3" ]
+		then
+			echo "New todo item : \"$3\" in list with name $2"
+		else
+			echo "Error: New todo item is missing"
+		fi
+
+	else
+		echo "Error: List name is missing"
+	fi;;
 done)
-	echo "This will mark as done a given item in a given list";;
+	if [ -n "$2" ]
+	then
+		if [ -n "$3" ]
+		then
+			echo "item number $3 in list with name $2 is DONE"
+		else
+			echo "Error: item number is missing"
+		fi
+	else
+		echo "Error: List name is missing"
+	fi;;
 delete)
-	echo "This will delete a given item from a given list";;
+	if [ -n "$2" ]
+	then
+		if [ -n "$3" ]
+		then
+			echo "item number $3 is deleted from list with name $2"
+		else
+			echo "Error: item number is missing"
+		fi
+	else
+		echo "Error: List name is missing"
+	fi;;
 *)
 	echo "Error : invalid parameters. Try 'todo --help' for valid options";;
 esac
