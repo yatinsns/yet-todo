@@ -25,5 +25,10 @@ todo delete <ListName> <ItemNumber>
 
 todo done <ListName> <ItemNumber>
 
+
+# To mark a done item in a list as TODO
+
+todo undone <ListName> <ItemNumber>
+
 ____________________________________________
 

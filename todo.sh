@@ -46,6 +46,18 @@ done)
 	else
 		echo "Error: List name is missing"
 	fi;;
+undone)
+	if [ -n "$2" ]
+	then
+		if [ -n "$3" ]
+		then
+			echo "item number $3 in list with name $2 is TODO"
+		else
+			echo "Error: item number is missing"
+		fi
+	else
+		echo "Error: List name is missing"
+	fi;;
 delete)
 	if [ -n "$2" ]
 	then
