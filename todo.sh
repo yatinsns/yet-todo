@@ -17,7 +17,7 @@ create)
 	if [ -n "$2" ]
 	then
 		echo "This will create a new list with name $2"
-		if [ -e "$todoDir/$2" ]
+		if [ -f "$todoDir/$2" ]
 		then
 			echo "Error : List with name $2 already exists."
 		else
@@ -30,7 +30,7 @@ remove)
 	if [ -n "$2" ]
 	then
 		echo "This will delete an existing list with name $2"
-		if [ -e "$todoDir/$2" ]
+		if [ -f "$todoDir/$2" ]
 		then
 			`rm -f $todoDir/$2`
 		else
@@ -42,9 +42,16 @@ remove)
 add)
 	if [ -n "$2" ]
 	then
+		if [ ! -f $todoDir/$2 ]
+		then
+			echo "Error : List with name $2 does not exist"
+			exit
+		fi
+
 		if [ -n "$3" ]
 		then
 			echo "New todo item : \"$3\" in list with name $2"
+			echo "TODO $3" >> "$todoDir/$2"
 		else
 			echo "Error: New todo item is missing"
 		fi
@@ -87,6 +94,18 @@ delete)
 		fi
 	else
 		echo "Error: List name is missing"
+	fi;;
+show)
+	if [ -n "$2" ]
+	then
+		if [ -f $todoDir/$2  ]
+		then
+			cat $todoDir/$2
+		else
+			echo "Error : List with name $2 does not exist"
+		fi
+	else
+		echo "Error : List name is missing"
 	fi;;
 *)
 	echo "Error : invalid parameters. Try 'todo --help' for valid options";;
