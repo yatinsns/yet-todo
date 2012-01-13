@@ -16,7 +16,13 @@ case $1 in
 create)
 	if [ -n "$2" ]
 	then
-		echo "This will create a new list with name $2"	
+		echo "This will create a new list with name $2"
+		if [ -e "$todoDir/$2" ]
+		then
+			echo "Error : List with name $2 already exists."
+		else
+			`touch $todoDir/$2`
+		fi
 	else
 		echo "Error: List name is missing"
 	fi;;
@@ -24,6 +30,12 @@ remove)
 	if [ -n "$2" ]
 	then
 		echo "This will delete an existing list with name $2"
+		if [ -e "$todoDir/$2" ]
+		then
+			`rm -f $todoDir/$2`
+		else
+			echo "Error : List with name $2 does not exist"
+		fi
 	else
 		echo "Error: List name is missing"
 	fi;;
