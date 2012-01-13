@@ -62,9 +62,16 @@ add)
 done)
 	if [ -n "$2" ]
 	then
+		if [ ! -f $todoDir/$2  ]
+		then
+			echo "Error : List with name $2 does not exist"
+		fi
+
 		if [ -n "$3" ]
 		then
 			echo "item number $3 in list with name $2 is DONE"
+			awk -f ./awk/status.awk line=$3 status="DONE" $todoDir/$2 > $todoDir/$2.tmp
+			mv $todoDir/$2.tmp $todoDir/$2
 		else
 			echo "Error: item number is missing"
 		fi
@@ -77,6 +84,8 @@ undone)
 		if [ -n "$3" ]
 		then
 			echo "item number $3 in list with name $2 is TODO"
+			awk -f ./awk/status.awk line=$3 status="TODO" $todoDir/$2 > $todoDir/$2.tmp
+			mv $todoDir/$2.tmp $todoDir/$2
 		else
 			echo "Error: item number is missing"
 		fi
