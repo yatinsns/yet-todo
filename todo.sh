@@ -1,5 +1,11 @@
 #!/bin/bash
 
+todoDir="$HOME/.todo/"
+if [ ! -d $todoDir ]
+then
+	`mkdir $todoDir`
+fi
+
 if [ $# -eq 0 ]
 then 
 	echo "Error : wrong number of paramaters"
