@@ -109,7 +109,7 @@ show)
 	then
 		if [ -f $todoDir/$2  ]
 		then
-			cat $todoDir/$2
+			awk -f ./awk/show.awk $todoDir/$2
 		else
 			echo "Error : List with name $2 does not exist"
 		fi
