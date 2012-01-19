@@ -51,7 +51,7 @@ add)
 		if [ -n "$3" ]
 		then
 			echo "New todo item : \"$3\" in list with name $2"
-			echo "TODO $3" >> "$todoDir/$2"
+			echo "TODO:$3" >> "$todoDir/$2"
 		else
 			echo "Error: New todo item is missing"
 		fi
@@ -98,6 +98,8 @@ delete)
 		if [ -n "$3" ]
 		then
 			echo "item number $3 is deleted from list with name $2"
+			awk -f ./awk/remove.awk line=$3 $todoDir/$2 > $todoDir/$2.tmp
+			mv $todoDir/$2.tmp $todoDir/$2
 		else
 			echo "Error: item number is missing"
 		fi

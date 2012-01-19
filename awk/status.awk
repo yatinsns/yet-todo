@@ -1,3 +1,7 @@
+BEGIN {
+FS=":"
+OFS=":"
+}
 {
 if (NR==line)
 {
