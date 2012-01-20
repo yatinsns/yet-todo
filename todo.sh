@@ -21,7 +21,18 @@ create)
 		then
 			echo "Error : List with name $2 already exists."
 		else
-			`touch $todoDir/$2`
+			if [ -n "$3" ]
+			then 
+				if [ -f "$todoDir/$3" ]
+				then 
+					awk -f ./awk/copyTODO.awk $todoDir/$3 > $todoDir/$2
+
+				else
+					echo "Error: List with name $3 does not exist."
+				fi
+			else
+				`touch $todoDir/$2`
+			fi
 		fi
 	else
 		echo "Error: List name is missing"

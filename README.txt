@@ -30,5 +30,9 @@ todo done <ListName> <ItemNumber>
 
 todo undone <ListName> <ItemNumber>
 
+
+# To create a new todo list from an existing list (only todo items will be copied)
+
+todo create <NewListName> <OldListName>
 ____________________________________________
 
